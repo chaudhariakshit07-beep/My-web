@@ -1,0 +1,2026 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vibe Cafe — Your Corner of the Internet</title>
+  <meta name="description" content="A cozy, premium Discord lounge for late-night conversations, new friendships, gaming sessions, and everyday moments worth sharing.">
+  
+  <!-- Open Graph / Social Media -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Vibe Cafe — Your Corner of the Internet">
+  <meta property="og:description" content="Good people. Good conversations. Better vibes. Join our cozy online lounge.">
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    /* ==========================================================================
+       1. DESIGN SYSTEM & CSS VARIABLES
+       ========================================================================== */
+    :root {
+      --bg-main: #0D0E10;
+      --bg-secondary: #141519;
+      --bg-card: #191A1F;
+      --bg-card-hover: #212229;
+      --text-primary: #F5F1E9;
+      --text-secondary: #A6A6AE;
+      --accent: #C6A77D;
+      --accent-hover: #DCC19A;
+      --accent-glow: rgba(198, 167, 125, 0.15);
+      --border-subtle: rgba(255, 255, 255, 0.09);
+      --border-accent: rgba(198, 167, 125, 0.3);
+      
+      --font-sans: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+      --font-serif: 'Cinzel', Georgia, serif;
+      
+      --radius-sm: 8px;
+      --radius-md: 14px;
+      --radius-lg: 20px;
+      --radius-full: 9999px;
+      
+      --transition-fast: 180ms cubic-bezier(0.16, 1, 0.3, 1);
+      --transition-normal: 250ms cubic-bezier(0.16, 1, 0.3, 1);
+      --transition-slow: 400ms cubic-bezier(0.16, 1, 0.3, 1);
+      
+      --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.3);
+      --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.4);
+      --shadow-lg: 0 16px 36px rgba(0, 0, 0, 0.6);
+      
+      --container-max: 1200px;
+    }
+
+    /* Reset & Base Styles */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      font-size: 16px;
+      background-color: var(--bg-main);
+      color: var(--text-primary);
+      font-family: var(--font-sans);
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    body {
+      overflow-x: hidden;
+      line-height: 1.6;
+    }
+
+    /* Selection */
+    ::selection {
+      background-color: var(--accent);
+      color: var(--bg-main);
+    }
+
+    /* Typography */
+    h1, h2, h3, h4 {
+      color: var(--text-primary);
+      line-height: 1.2;
+      font-weight: 600;
+    }
+
+    .font-serif {
+      font-family: var(--font-serif);
+      letter-spacing: 0.02em;
+    }
+
+    p {
+      color: var(--text-secondary);
+      font-size: clamp(0.95rem, 1vw + 0.5rem, 1.1rem);
+      max-width: 65ch;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+      transition: color var(--transition-fast);
+    }
+
+    ul {
+      list-style: none;
+    }
+
+    /* Utility Layout Classes */
+    .container {
+      width: 100%;
+      max-width: var(--container-max);
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+
+    .section {
+      padding: clamp(4rem, 8vw, 7.5rem) 0;
+      position: relative;
+    }
+
+    .section-eyebrow {
+      display: inline-block;
+      font-size: 0.8rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: var(--accent);
+      margin-bottom: 0.75rem;
+    }
+
+    .section-title {
+      font-size: clamp(2rem, 3.5vw, 3rem);
+      margin-bottom: 1.25rem;
+    }
+
+    .section-desc {
+      margin-bottom: 3rem;
+    }
+
+    /* Buttons */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      padding: 0.85rem 1.75rem;
+      border-radius: var(--radius-full);
+      font-size: 0.95rem;
+      font-weight: 500;
+      cursor: pointer;
+      border: 1px solid transparent;
+      transition: all var(--transition-normal);
+      text-align: center;
+      white-space: nowrap;
+    }
+
+    .btn-primary {
+      background-color: var(--accent);
+      color: var(--bg-main);
+      border-color: var(--accent);
+      font-weight: 600;
+    }
+
+    .btn-primary:hover {
+      background-color: var(--accent-hover);
+      border-color: var(--accent-hover);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(198, 167, 125, 0.25);
+    }
+
+    .btn-secondary {
+      background-color: rgba(255, 255, 255, 0.04);
+      color: var(--text-primary);
+      border-color: var(--border-subtle);
+    }
+
+    .btn-secondary:hover {
+      background-color: rgba(255, 255, 255, 0.08);
+      border-color: var(--accent);
+      color: var(--accent);
+      transform: translateY(-2px);
+    }
+
+    /* Focus States for Accessibility */
+    button:focus-visible,
+    a:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 3px;
+    }
+
+    /* ==========================================================================
+       2. HEADER & NAVIGATION
+       ========================================================================== */
+    .header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      padding: 1.25rem 0;
+      transition: all var(--transition-normal);
+      background-color: transparent;
+    }
+
+    .header.scrolled {
+      padding: 0.85rem 0;
+      background-color: rgba(13, 14, 16, 0.85);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border-subtle);
+    }
+
+    .nav-wrapper {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      letter-spacing: -0.02em;
+    }
+
+    .logo-icon {
+      width: 34px;
+      height: 34px;
+      background: linear-gradient(135deg, var(--accent) 0%, #A38053 100%);
+      border-radius: var(--radius-sm);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--bg-main);
+      box-shadow: 0 4px 12px rgba(198, 167, 125, 0.2);
+    }
+
+    .nav-menu {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+    }
+
+    .nav-link {
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+      font-weight: 500;
+      position: relative;
+    }
+
+    .nav-link:hover,
+    .nav-link.active {
+      color: var(--text-primary);
+    }
+
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      width: 0%;
+      height: 2px;
+      background-color: var(--accent);
+      transition: width var(--transition-fast);
+      border-radius: 2px;
+    }
+
+    .nav-link:hover::after,
+    .nav-link.active::after {
+      width: 100%;
+    }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .hamburger {
+      display: none;
+      background: none;
+      border: none;
+      color: var(--text-primary);
+      cursor: pointer;
+      padding: 0.5rem;
+      z-index: 1001;
+    }
+
+    /* ==========================================================================
+       3. HERO SECTION
+       ========================================================================== */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding-top: 7rem;
+      padding-bottom: 4rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Hero Background Ambient Light */
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -20%;
+      right: -10%;
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(circle, var(--accent-glow) 0%, rgba(13, 14, 16, 0) 70%);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 3.5rem;
+      align-items: center;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-content {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    .hero-title {
+      font-size: clamp(2.5rem, 5vw, 4.2rem);
+      letter-spacing: -0.03em;
+      margin-bottom: 1.5rem;
+      line-height: 1.1;
+    }
+
+    .hero-title span {
+      color: var(--accent);
+      font-style: italic;
+    }
+
+    .hero-desc {
+      font-size: clamp(1.05rem, 1.2vw, 1.25rem);
+      margin-bottom: 2.25rem;
+    }
+
+    .hero-buttons {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-bottom: 2rem;
+    }
+
+    .hero-trust {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      border-top: 1px solid var(--border-subtle);
+      padding-top: 1.5rem;
+      width: 100%;
+    }
+
+    .trust-dot {
+      width: 8px;
+      height: 8px;
+      background-color: #4E9F3D;
+      border-radius: 50%;
+      box-shadow: 0 0 8px rgba(78, 159, 61, 0.6);
+    }
+
+    /* Hero Interactive Graphic Preview */
+    .hero-visual {
+      position: relative;
+      width: 100%;
+      height: 480px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .cafe-lounge-card {
+      width: 100%;
+      max-width: 440px;
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-lg);
+      padding: 1.75rem;
+      box-shadow: var(--shadow-lg);
+      position: relative;
+      backdrop-filter: blur(10px);
+    }
+
+    .card-header-mock {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 1.5rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid var(--border-subtle);
+    }
+
+    .server-badge {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+
+    .server-avatar {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: var(--accent);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--bg-main);
+      font-weight: 700;
+      font-size: 0.9rem;
+    }
+
+    .server-info h4 {
+      font-size: 0.95rem;
+      line-height: 1.2;
+    }
+
+    .server-info p {
+      font-size: 0.75rem;
+      color: var(--text-secondary);
+    }
+
+    .live-status {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-size: 0.75rem;
+      color: var(--accent);
+      background: var(--accent-glow);
+      padding: 0.3rem 0.75rem;
+      border-radius: var(--radius-full);
+      border: 1px solid var(--border-accent);
+    }
+
+    /* Floating Pills */
+    .floating-pill {
+      position: absolute;
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-subtle);
+      padding: 0.85rem 1.25rem;
+      border-radius: var(--radius-md);
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      box-shadow: var(--shadow-md);
+      transition: transform var(--transition-normal);
+      animation: float 6s ease-in-out infinite;
+    }
+
+    .floating-pill:hover {
+      transform: translateY(-4px) scale(1.02);
+      border-color: var(--border-accent);
+    }
+
+    .pill-1 {
+      top: 10%;
+      left: -10%;
+      animation-delay: 0s;
+    }
+
+    .pill-2 {
+      bottom: 15%;
+      right: -8%;
+      animation-delay: 3s;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-10px); }
+    }
+
+    .pill-icon {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.05);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--accent);
+    }
+
+    .pill-text h5 {
+      font-size: 0.85rem;
+      font-weight: 600;
+    }
+
+    .pill-text p {
+      font-size: 0.75rem;
+      color: var(--text-secondary);
+    }
+
+    /* Mock Chat Window Inside Card */
+    .chat-mock-list {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .chat-bubble {
+      display: flex;
+      gap: 0.75rem;
+      background: rgba(255, 255, 255, 0.02);
+      padding: 0.75rem;
+      border-radius: var(--radius-md);
+      border: 1px solid rgba(255, 255, 255, 0.03);
+    }
+
+    .chat-avatar {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background-size: cover;
+      flex-shrink: 0;
+      background-color: var(--bg-secondary);
+    }
+
+    .chat-body h6 {
+      font-size: 0.8rem;
+      color: var(--accent);
+      margin-bottom: 0.2rem;
+    }
+
+    .chat-body p {
+      font-size: 0.825rem;
+      color: var(--text-primary);
+      line-height: 1.4;
+    }
+
+    /* ==========================================================================
+       4. ABOUT SECTION
+       ========================================================================== */
+    .about-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.75rem;
+    }
+
+    .card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-lg);
+      padding: 2.25rem;
+      transition: all var(--transition-normal);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card:hover {
+      background: var(--bg-card-hover);
+      border-color: var(--border-accent);
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-md);
+    }
+
+    .card-icon {
+      width: 48px;
+      height: 48px;
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--accent);
+      margin-bottom: 1.5rem;
+      transition: border-color var(--transition-fast);
+    }
+
+    .card:hover .card-icon {
+      border-color: var(--accent);
+    }
+
+    .card h3 {
+      font-size: 1.3rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .card p {
+      font-size: 0.95rem;
+      line-height: 1.6;
+    }
+
+    /* ==========================================================================
+       5. THE EXPERIENCE SECTION
+       ========================================================================== */
+    .experience-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.75rem;
+    }
+
+    .exp-card {
+      display: flex;
+      gap: 1.5rem;
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-lg);
+      padding: 2rem;
+      transition: all var(--transition-normal);
+    }
+
+    .exp-card:hover {
+      border-color: var(--border-accent);
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-md);
+    }
+
+    .exp-icon {
+      width: 52px;
+      height: 52px;
+      background: var(--accent-glow);
+      border: 1px solid var(--border-accent);
+      border-radius: var(--radius-md);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--accent);
+      flex-shrink: 0;
+    }
+
+    .exp-content h3 {
+      font-size: 1.25rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .exp-content p {
+      font-size: 0.925rem;
+    }
+
+    /* ==========================================================================
+       6. COMMUNITY SHOWCASE SECTION
+       ========================================================================== */
+    .showcase-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .showcase-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-lg);
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+      transition: all var(--transition-normal);
+    }
+
+    .showcase-card:hover {
+      border-color: var(--border-accent);
+      transform: translateY(-4px);
+    }
+
+    .showcase-preview {
+      width: 100%;
+      height: 160px;
+      background: var(--bg-secondary);
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border-subtle);
+      display: flex;
+      flex-direction: column;
+      padding: 1rem;
+      justify-content: space-between;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .preview-tag {
+      align-self: flex-start;
+      font-size: 0.7rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      padding: 0.25rem 0.6rem;
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: var(--radius-full);
+      color: var(--accent);
+    }
+
+    .preview-content-graphic {
+      display: flex;
+      align-items: flex-end;
+      gap: 0.5rem;
+      height: 100%;
+      padding-top: 0.75rem;
+    }
+
+    /* Abstract Visual Elements for Showcase */
+    .audio-wave {
+      display: flex;
+      align-items: flex-end;
+      gap: 4px;
+      height: 40px;
+      width: 100%;
+      justify-content: center;
+    }
+
+    .bar {
+      width: 6px;
+      background: var(--accent);
+      border-radius: 3px;
+      animation: wave 1.2s infinite ease-in-out alternate;
+    }
+
+    .bar:nth-child(1) { height: 30%; animation-delay: 0.1s; }
+    .bar:nth-child(2) { height: 80%; animation-delay: 0.3s; }
+    .bar:nth-child(3) { height: 50%; animation-delay: 0.2s; }
+    .bar:nth-child(4) { height: 95%; animation-delay: 0.4s; }
+    .bar:nth-child(5) { height: 40%; animation-delay: 0.15s; }
+
+    @keyframes wave {
+      0% { transform: scaleY(0.3); }
+      100% { transform: scaleY(1); }
+    }
+
+    .game-badge-mock {
+      display: flex;
+      gap: 0.5rem;
+      width: 100%;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .game-pill {
+      font-size: 0.75rem;
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      padding: 0.4rem 0.8rem;
+      border-radius: var(--radius-sm);
+      color: var(--text-primary);
+    }
+
+    /* ==========================================================================
+       7. HOW TO JOIN SECTION
+       ========================================================================== */
+    .steps-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+      margin-bottom: 3rem;
+    }
+
+    .step-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-lg);
+      padding: 2.25rem;
+      position: relative;
+    }
+
+    .step-number {
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: rgba(198, 167, 125, 0.25);
+      margin-bottom: 1rem;
+      font-family: var(--font-serif);
+    }
+
+    .step-card h3 {
+      font-size: 1.2rem;
+      margin-bottom: 0.6rem;
+    }
+
+    .join-cta-wrapper {
+      text-align: center;
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-subtle);
+      padding: 3rem 2rem;
+      border-radius: var(--radius-lg);
+    }
+
+    .join-cta-wrapper h3 {
+      font-size: 1.8rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .join-cta-wrapper p {
+      margin: 0 auto 1.75rem auto;
+    }
+
+    /* ==========================================================================
+       8. COMMUNITY GUIDELINES SECTION
+       ========================================================================== */
+    .guidelines-box {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-lg);
+      padding: 3rem;
+    }
+
+    .guidelines-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.75rem;
+      margin-top: 2rem;
+    }
+
+    .guideline-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+    }
+
+    .guideline-check {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background: var(--accent-glow);
+      border: 1px solid var(--border-accent);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--accent);
+      flex-shrink: 0;
+      margin-top: 0.2rem;
+    }
+
+    .guideline-item p {
+      font-size: 0.95rem;
+      color: var(--text-primary);
+    }
+
+    /* ==========================================================================
+       9. FAQ SECTION
+       ========================================================================== */
+    .faq-accordion {
+      max-width: 800px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .faq-item {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      transition: border-color var(--transition-fast);
+    }
+
+    .faq-item:hover {
+      border-color: var(--border-accent);
+    }
+
+    .faq-button {
+      width: 100%;
+      padding: 1.35rem 1.75rem;
+      background: none;
+      border: none;
+      color: var(--text-primary);
+      font-size: 1.05rem;
+      font-weight: 600;
+      text-align: left;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      font-family: inherit;
+    }
+
+    .faq-icon {
+      width: 20px;
+      height: 20px;
+      color: var(--accent);
+      transition: transform var(--transition-normal);
+      flex-shrink: 0;
+    }
+
+    .faq-item.active .faq-icon {
+      transform: rotate(180deg);
+    }
+
+    .faq-content {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height var(--transition-normal), padding var(--transition-normal);
+      padding: 0 1.75rem;
+    }
+
+    .faq-item.active .faq-content {
+      max-height: 250px;
+      padding: 0 1.75rem 1.5rem 1.75rem;
+    }
+
+    .faq-content p {
+      font-size: 0.95rem;
+      color: var(--text-secondary);
+    }
+
+    /* ==========================================================================
+       10. FINAL CTA SECTION
+       ========================================================================== */
+    .final-cta {
+      background: linear-gradient(180deg, var(--bg-main) 0%, var(--bg-secondary) 100%);
+      border-top: 1px solid var(--border-subtle);
+      border-bottom: 1px solid var(--border-subtle);
+      text-align: center;
+      padding: 6rem 0;
+    }
+
+    .final-cta-box {
+      max-width: 650px;
+      margin: 0 auto;
+    }
+
+    .final-cta h2 {
+      font-size: clamp(2.2rem, 4vw, 3.2rem);
+      margin-bottom: 1rem;
+    }
+
+    .final-cta p {
+      margin: 0 auto 2.25rem auto;
+      font-size: 1.1rem;
+    }
+
+    /* ==========================================================================
+       11. FOOTER
+       ========================================================================== */
+    .footer {
+      background: var(--bg-main);
+      padding: 4rem 0 2rem 0;
+      border-top: 1px solid var(--border-subtle);
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr;
+      gap: 3rem;
+      margin-bottom: 3.5rem;
+    }
+
+    .footer-brand p {
+      margin-top: 0.75rem;
+      font-size: 0.9rem;
+    }
+
+    .footer-col h4 {
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--text-primary);
+      margin-bottom: 1.25rem;
+    }
+
+    .footer-links {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    .footer-links a {
+      color: var(--text-secondary);
+      font-size: 0.9rem;
+    }
+
+    .footer-links a:hover {
+      color: var(--accent);
+    }
+
+    .footer-bottom {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-top: 2rem;
+      border-top: 1px solid var(--border-subtle);
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+    }
+
+    .back-to-top {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      color: var(--text-primary);
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all var(--transition-fast);
+    }
+
+    .back-to-top:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+      transform: translateY(-2px);
+    }
+
+    /* ==========================================================================
+       12. MODAL FOR CODE / CONFIG NOTIFICATION
+       ========================================================================== */
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.75);
+      backdrop-filter: blur(6px);
+      z-index: 2000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity var(--transition-normal);
+    }
+
+    .modal-overlay.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .modal-container {
+      background: var(--bg-card);
+      border: 1px solid var(--border-accent);
+      border-radius: var(--radius-lg);
+      max-width: 520px;
+      width: 100%;
+      padding: 2.25rem;
+      box-shadow: var(--shadow-lg);
+      transform: scale(0.95);
+      transition: transform var(--transition-normal);
+    }
+
+    .modal-overlay.active .modal-container {
+      transform: scale(1);
+    }
+
+    .modal-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 1rem;
+    }
+
+    .modal-header h3 {
+      font-size: 1.3rem;
+      color: var(--text-primary);
+    }
+
+    .modal-close {
+      background: none;
+      border: none;
+      color: var(--text-secondary);
+      cursor: pointer;
+      font-size: 1.25rem;
+    }
+
+    .modal-close:hover {
+      color: var(--text-primary);
+    }
+
+    .modal-body p {
+      font-size: 0.95rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .modal-code-box {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-subtle);
+      padding: 0.85rem 1rem;
+      border-radius: var(--radius-sm);
+      font-family: monospace;
+      font-size: 0.85rem;
+      color: var(--accent);
+      word-break: break-all;
+      margin-bottom: 1.5rem;
+    }
+
+    /* Inspector Code View Floating Button */
+    .inspector-fab {
+      position: fixed;
+      bottom: 1.5rem;
+      left: 1.5rem;
+      z-index: 900;
+      background: var(--bg-card);
+      border: 1px solid var(--border-accent);
+      color: var(--accent);
+      padding: 0.6rem 1rem;
+      border-radius: var(--radius-full);
+      font-size: 0.8rem;
+      font-weight: 600;
+      cursor: pointer;
+      box-shadow: var(--shadow-md);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: all var(--transition-normal);
+    }
+
+    .inspector-fab:hover {
+      background: var(--accent);
+      color: var(--bg-main);
+      transform: translateY(-2px);
+    }
+
+    /* Code View Fullscreen Modal */
+    .code-view-modal {
+      max-width: 900px;
+      width: 90%;
+      max-height: 85vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .code-tabs {
+      display: flex;
+      gap: 0.5rem;
+      margin-bottom: 1rem;
+      border-bottom: 1px solid var(--border-subtle);
+      padding-bottom: 0.5rem;
+      overflow-x: auto;
+    }
+
+    .code-tab {
+      background: transparent;
+      border: none;
+      color: var(--text-secondary);
+      padding: 0.5rem 1rem;
+      font-size: 0.85rem;
+      cursor: pointer;
+      border-radius: var(--radius-sm);
+    }
+
+    .code-tab.active {
+      background: var(--bg-secondary);
+      color: var(--accent);
+      font-weight: 600;
+    }
+
+    .code-content {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-subtle);
+      padding: 1rem;
+      border-radius: var(--radius-md);
+      overflow-y: auto;
+      font-family: monospace;
+      font-size: 0.85rem;
+      color: var(--text-primary);
+      white-space: pre-wrap;
+      max-height: 50vh;
+    }
+
+    /* ==========================================================================
+       13. RESPONSIVE MEDIA QUERIES
+       ========================================================================== */
+    @media (max-width: 992px) {
+      .hero-grid {
+        grid-template-columns: 1fr;
+        gap: 3rem;
+      }
+
+      .hero-content {
+        align-items: center;
+        text-align: center;
+      }
+
+      .hero-buttons {
+        justify-content: center;
+      }
+
+      .experience-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .steps-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .footer-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .hamburger {
+        display: block;
+      }
+
+      .nav-menu {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: 80%;
+        max-width: 320px;
+        height: 100vh;
+        background: var(--bg-card);
+        flex-direction: column;
+        justify-content: center;
+        gap: 2rem;
+        padding: 2rem;
+        transition: right var(--transition-normal);
+        box-shadow: var(--shadow-lg);
+        border-left: 1px solid var(--border-subtle);
+      }
+
+      .nav-menu.open {
+        right: 0;
+      }
+
+      .nav-actions {
+        display: none;
+      }
+
+      .hero-visual {
+        height: auto;
+      }
+
+      .floating-pill {
+        display: none;
+      }
+
+      .footer-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .footer-bottom {
+        flex-direction: column;
+        gap: 1rem;
+        text-align: center;
+      }
+    }
+
+    /* Reduced Motion */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ==========================================================================
+       HEADER / NAVIGATION
+       ========================================================================== -->
+  <header class="header" id="header">
+    <div class="container">
+      <div class="nav-wrapper">
+        
+        <!-- Logo -->
+        <a href="#home" class="logo" aria-label="Vibe Cafe Homepage">
+          <div class="logo-icon">
+            <!-- Minimal SVG Cafe Cup Icon -->
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M17 8h1a4 4 0 1 1 0 8h-1"></path>
+              <path d="M3 8h14v9a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4Z"></path>
+              <line x1="6" y1="2" x2="6" y2="4"></line>
+              <line x1="10" y1="2" x2="10" y2="4"></line>
+              <line x1="14" y1="2" x2="14" y2="4"></line>
+            </svg>
+          </div>
+          <span class="font-serif">Vibe Cafe</span>
+        </a>
+
+        <!-- Navigation Menu -->
+        <nav class="nav-menu" id="navMenu" aria-label="Main Navigation">
+          <a href="#home" class="nav-link active">Home</a>
+          <a href="#about" class="nav-link">About</a>
+          <a href="#experience" class="nav-link">The Experience</a>
+          <a href="#community" class="nav-link">Community</a>
+          <a href="#faq" class="nav-link">FAQ</a>
+        </nav>
+
+        <!-- Actions -->
+        <div class="nav-actions">
+          <a href="https://discord.gg/Rq5gHjZtbz" class="btn btn-primary js-discord-btn" target="_blank" rel="noopener noreferrer">
+            Join the Cafe ↗
+          </a>
+        </div>
+
+        <!-- Hamburger Toggle -->
+        <button class="hamburger" id="hamburgerBtn" aria-label="Toggle navigation menu" aria-expanded="false">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+            <line x1="3" y1="12" x2="21" y2="12"></line>
+            <line x1="3" y1="6" x2="21" y2="6"></line>
+            <line x1="3" y1="18" x2="21" y2="18"></line>
+          </svg>
+        </button>
+
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- ==========================================================================
+         HERO SECTION
+         ========================================================================== -->
+    <section class="hero" id="home">
+      <div class="container">
+        <div class="hero-grid">
+          
+          <div class="hero-content">
+            <span class="section-eyebrow">YOUR ONLINE HANGOUT</span>
+            <h1 class="hero-title">
+              Find your people.<br>
+              Stay for the <span>vibe.</span>
+            </h1>
+            <p class="hero-desc">
+              A little corner of the internet for late-night conversations, new friendships, gaming sessions, and everyday moments worth sharing.
+            </p>
+            <div class="hero-buttons">
+              <a href="https://discord.gg/Rq5gHjZtbz" class="btn btn-primary js-discord-btn" target="_blank" rel="noopener noreferrer">
+                Join Vibe Cafe
+              </a>
+              <a href="#about" class="btn btn-secondary">
+                Explore the Community
+              </a>
+            </div>
+            <div class="hero-trust">
+              <span class="trust-dot"></span>
+              <span>A place to unwind, connect, and be yourself.</span>
+            </div>
+          </div>
+
+          <!-- Hero Interactive Visual Card -->
+          <div class="hero-visual">
+            <div class="cafe-lounge-card">
+              
+              <div class="card-header-mock">
+                <div class="server-badge">
+                  <div class="server-avatar">VC</div>
+                  <div class="server-info">
+                    <h4>Vibe Cafe Lounge</h4>
+                    <p>Discord Community</p>
+                  </div>
+                </div>
+                <div class="live-status">
+                  <span>● Active Lounge</span>
+                </div>
+              </div>
+
+              <!-- Mock Conversations -->
+              <div class="chat-mock-list">
+                <div class="chat-bubble">
+                  <div class="chat-avatar" style="background-image: url('https://placehold.co/60x60/C6A77D/0D0E10?text=A');"></div>
+                  <div class="chat-body">
+                    <h6>Alex</h6>
+                    <p>Anyone up for a chill lo-fi gaming session tonight? 🎧</p>
+                  </div>
+                </div>
+                
+                <div class="chat-bubble">
+                  <div class="chat-avatar" style="background-image: url('https://placehold.co/60x60/A6A6AE/0D0E10?text=S');"></div>
+                  <div class="chat-body">
+                    <h6>Sam</h6>
+                    <p>Count me in! Just grabbed a fresh cup of coffee ☕</p>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+
+            <!-- Floating Badges -->
+            <div class="floating-pill pill-1">
+              <div class="pill-icon">🎮</div>
+              <div class="pill-text">
+                <h5>Co-op Gaming</h5>
+                <p>Casual & Friendly</p>
+              </div>
+            </div>
+
+            <div class="floating-pill pill-2">
+              <div class="pill-icon">🎵</div>
+              <div class="pill-text">
+                <h5>Music Lounge</h5>
+                <p>Sharing Daily Vibes</p>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         ABOUT SECTION
+         ========================================================================== -->
+    <section class="section" id="about">
+      <div class="container">
+        <span class="section-eyebrow">THE IDEA</span>
+        <h2 class="section-title">More than a server.<br>A place to belong.</h2>
+        <p class="section-desc">
+          Vibe Cafe brings people together through conversations, shared interests, games, and the little moments that make an online community feel like home.
+        </p>
+
+        <div class="about-cards">
+          
+          <div class="card">
+            <div class="card-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                <circle cx="9" cy="7" r="4"></circle>
+                <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+              </svg>
+            </div>
+            <h3>Meet Your People</h3>
+            <p>Connect with new people, discover shared interests, and build genuine friendships at your own pace.</p>
+          </div>
+
+          <div class="card">
+            <div class="card-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2zm0 18a8 8 0 1 1 8-8 8 8 0 0 1-8 8z"></path>
+                <path d="M12 6v6l4 2"></path>
+              </svg>
+            </div>
+            <h3>Your Daily Escape</h3>
+            <p>Drop in after a long day, join a conversation, or simply relax and enjoy the calm atmosphere.</p>
+          </div>
+
+          <div class="card">
+            <div class="card-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+              </svg>
+            </div>
+            <h3>Make Memories</h3>
+            <p>From gaming sessions to random late-night discussions, there is always room for another good moment.</p>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         THE EXPERIENCE SECTION
+         ========================================================================== -->
+    <section class="section" id="experience" style="background: var(--bg-secondary);">
+      <div class="container">
+        <span class="section-eyebrow">WHAT'S THE VIBE?</span>
+        <h2 class="section-title">Something for every mood.</h2>
+        <p class="section-desc">Whether you want to talk shop, find a squad for gaming, or listen to music in silence, we have a space for you.</p>
+
+        <div class="experience-grid">
+          
+          <div class="exp-card">
+            <div class="exp-icon">💬</div>
+            <div class="exp-content">
+              <h3>Conversations</h3>
+              <p>Everyday chats, random thoughts, life updates, and meaningful discussions in a warm atmosphere.</p>
+            </div>
+          </div>
+
+          <div class="exp-card">
+            <div class="exp-icon">🎮</div>
+            <div class="exp-content">
+              <h3>Gaming</h3>
+              <p>Find teammates to play with, share game highlights, or drop into casual co-op sessions.</p>
+            </div>
+          </div>
+
+          <div class="exp-card">
+            <div class="exp-icon">🎵</div>
+            <div class="exp-content">
+              <h3>Music & Media</h3>
+              <p>Share track recommendations, discover new playlists, and share movies or shows you love.</p>
+            </div>
+          </div>
+
+          <div class="exp-card">
+            <div class="exp-icon">✨</div>
+            <div class="exp-content">
+              <h3>Community Events</h3>
+              <p>Relaxed group activities, game nights, and movie streams planned organically by the community.</p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         COMMUNITY SHOWCASE SECTION
+         ========================================================================== -->
+    <section class="section" id="community">
+      <div class="container">
+        <span class="section-eyebrow">INSIDE THE CAFE</span>
+        <h2 class="section-title">A little peek into our world.</h2>
+        <p class="section-desc">Explore the quiet corners and active spaces inside Vibe Cafe.</p>
+
+        <div class="showcase-grid">
+          
+          <div class="showcase-card">
+            <div class="showcase-preview">
+              <span class="preview-tag">#general-chat</span>
+              <div class="chat-mock-list" style="margin-top: 0.5rem;">
+                <div style="font-size: 0.8rem; color: var(--text-secondary);">"Good morning everyone! Coffee brewed ☕"</div>
+              </div>
+            </div>
+            <h4>General Lounge</h4>
+            <p>Our main living room where everyone gathers for daily catch-ups and coffee talk.</p>
+          </div>
+
+          <div class="showcase-card">
+            <div class="showcase-preview">
+              <span class="preview-tag">#gaming-den</span>
+              <div class="preview-content-graphic">
+                <div class="game-badge-mock">
+                  <span class="game-pill">Valorant</span>
+                  <span class="game-pill">Minecraft</span>
+                </div>
+              </div>
+            </div>
+            <h4>Gaming Squads</h4>
+            <p>Dedicated voice and text rooms for cooperative play and finding teammates.</p>
+          </div>
+
+          <div class="showcase-card">
+            <div class="showcase-preview">
+              <span class="preview-tag">#music-room</span>
+              <div class="preview-content-graphic">
+                <div class="audio-wave">
+                  <div class="bar"></div>
+                  <div class="bar"></div>
+                  <div class="bar"></div>
+                  <div class="bar"></div>
+                  <div class="bar"></div>
+                </div>
+              </div>
+            </div>
+            <h4>Music & Chill</h4>
+            <p>24/7 lo-fi streams and music channels to study, work, or relax together.</p>
+          </div>
+
+          <div class="showcase-card">
+            <div class="showcase-preview">
+              <span class="preview-tag">#late-night</span>
+              <div style="font-size: 0.8rem; color: var(--accent); margin-top: 1rem;">🌙 2:00 AM Thoughts</div>
+            </div>
+            <h4>Late Night Corner</h4>
+            <p>For night owls looking for deep conversations when the rest of the world is asleep.</p>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         HOW TO JOIN SECTION
+         ========================================================================== -->
+    <section class="section" style="background: var(--bg-secondary);">
+      <div class="container">
+        <span class="section-eyebrow">YOUR NEXT HANGOUT</span>
+        <h2 class="section-title">Pull up a chair.</h2>
+        <p class="section-desc">Joining Vibe Cafe takes less than a minute. Here is how to get started.</p>
+
+        <div class="steps-grid">
+          
+          <div class="step-card">
+            <div class="step-number">01</div>
+            <h3>Join the Discord</h3>
+            <p>Click the invite link to enter the server through your Discord app or web browser.</p>
+          </div>
+
+          <div class="step-card">
+            <div class="step-number">02</div>
+            <h3>Get Comfortable</h3>
+            <p>Take a quick look at our server rules and pick your optional role preferences.</p>
+          </div>
+
+          <div class="step-card">
+            <div class="step-number">03</div>
+            <h3>Catch the Vibe</h3>
+            <p>Say hello in #general-chat, join a voice room, or simply hang out at your own pace.</p>
+          </div>
+
+        </div>
+
+        <div class="join-cta-wrapper">
+          <h3>Ready to find your corner?</h3>
+          <p>We're excited to meet you. Everyone is welcome.</p>
+          <a href="https://discord.gg/Rq5gHjZtbz" class="btn btn-primary js-discord-btn" target="_blank" rel="noopener noreferrer">
+            Join the Community ↗
+          </a>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         COMMUNITY GUIDELINES SECTION
+         ========================================================================== -->
+    <section class="section">
+      <div class="container">
+        <div class="guidelines-box">
+          <span class="section-eyebrow">GOOD VIBES</span>
+          <h2 class="section-title">Good vibes start with respect.</h2>
+          <p>To keep Vibe Cafe cozy and welcoming for everyone, we ask all members to follow a few simple principles:</p>
+
+          <div class="guidelines-list">
+            
+            <div class="guideline-item">
+              <div class="guideline-check">✓</div>
+              <p>Be respectful, kind, and welcoming to new members.</p>
+            </div>
+
+            <div class="guideline-item">
+              <div class="guideline-check">✓</div>
+              <p>Respect everyone's personal boundaries and privacy.</p>
+            </div>
+
+            <div class="guideline-item">
+              <div class="guideline-check">✓</div>
+              <p>Keep conversations friendly and appropriate for the lounge.</p>
+            </div>
+
+            <div class="guideline-item">
+              <div class="guideline-check">✓</div>
+              <p>No harassment, spam, hate speech, or unsolicited promotions.</p>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         FAQ SECTION
+         ========================================================================== -->
+    <section class="section" id="faq">
+      <div class="container">
+        <div style="text-align: center; margin-bottom: 3rem;">
+          <span class="section-eyebrow">FREQUENTLY ASKED</span>
+          <h2 class="section-title">Got questions? We've got answers.</h2>
+        </div>
+
+        <div class="faq-accordion" id="faqAccordion">
+          
+          <div class="faq-item">
+            <button class="faq-button" aria-expanded="false">
+              <span>What is Vibe Cafe?</span>
+              <svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="6 9 12 15 18 9"></polyline>
+              </svg>
+            </button>
+            <div class="faq-content">
+              <p>Vibe Cafe is a relaxed Discord community designed for people who want to hang out, chat, meet new friends, play games, and share their daily interests in a cozy environment.</p>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-button" aria-expanded="false">
+              <span>How do I join?</span>
+              <svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="6 9 12 15 18 9"></polyline>
+              </svg>
+            </button>
+            <div class="faq-content">
+              <p>Simply click any "Join Vibe Cafe" button on this website! It will redirect you directly to our official Discord server invite link.</p>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-button" aria-expanded="false">
+              <span>Is it free to join?</span>
+              <svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="6 9 12 15 18 9"></polyline>
+              </svg>
+            </button>
+            <div class="faq-content">
+              <p>Yes, completely free! All you need is a free Discord account to join and participate in the community.</p>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-button" aria-expanded="false">
+              <span>Do I need to be active all the time?</span>
+              <svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="6 9 12 15 18 9"></polyline>
+              </svg>
+            </button>
+            <div class="faq-content">
+              <p>Not at all. You are welcome to participate as much or as little as you like. Feel free to pop in whenever you want to chat or lurk quietly.</p>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-button" aria-expanded="false">
+              <span>What can I do inside the community?</span>
+              <svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="6 9 12 15 18 9"></polyline>
+              </svg>
+            </button>
+            <div class="faq-content">
+              <p>You can chat in general rooms, find gaming buddies, share music and artwork, participate in voice hangs, or join community game nights.</p>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-button" aria-expanded="false">
+              <span>How can I get help inside the server?</span>
+              <svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="6 9 12 15 18 9"></polyline>
+              </svg>
+            </button>
+            <div class="faq-content">
+              <p>We have a dedicated support channel and an active moderation team inside Discord to assist you with any questions or issues.</p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         FINAL CALL TO ACTION
+         ========================================================================== -->
+    <section class="final-cta">
+      <div class="container">
+        <div class="final-cta-box">
+          <h2 class="font-serif">Your seat is waiting.</h2>
+          <p>Come for the conversations. Stay for the people.</p>
+          <a href="https://discord.gg/Rq5gHjZtbz" class="btn btn-primary js-discord-btn" target="_blank" rel="noopener noreferrer">
+            Enter Vibe Cafe ↗
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ==========================================================================
+       FOOTER
+       ========================================================================== -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        
+        <div class="footer-brand">
+          <a href="#home" class="logo">
+            <div class="logo-icon">☕</div>
+            <span class="font-serif">Vibe Cafe</span>
+          </a>
+          <p>Your corner of the internet. Good people, good conversations, better vibes.</p>
+        </div>
+
+        <div class="footer-col">
+          <h4>Navigation</h4>
+          <div class="footer-links">
+            <a href="#home">Home</a>
+            <a href="#about">About</a>
+            <a href="#experience">The Experience</a>
+            <a href="#community">Community</a>
+            <a href="#faq">FAQ</a>
+          </div>
+        </div>
+
+        <div class="footer-col">
+          <h4>Connect</h4>
+          <div class="footer-links">
+            <a href="https://discord.gg/Rq5gHjZtbz" class="js-discord-btn" target="_blank" rel="noopener noreferrer">Discord Server</a>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="footer-bottom">
+        <p>&copy; <span id="copyrightYear"></span> Vibe Cafe. All rights reserved.</p>
+        <button class="back-to-top" id="backToTopBtn" aria-label="Back to top of page">
+          ↑
+        </button>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ==========================================================================
+       DISCORD UNCONFIGURED MODAL
+       ========================================================================== -->
+  <div class="modal-overlay" id="discordModal">
+    <div class="modal-container">
+      <div class="modal-header">
+        <h3>Discord Invite Pending Configuration</h3>
+        <button class="modal-close" id="closeModalBtn">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p>The owner of this Vibe Cafe website has not yet replaced the placeholder invite code in <code>script.js</code>.</p>
+        <p>To configure your own Discord server link, open <code>script.js</code> and update:</p>
+        <div class="modal-code-box">
+          const CONFIG = {<br>
+          &nbsp;&nbsp;discordInvite: "https://discord.gg/Rq5gHjZtbz"<br>
+          };
+        </div>
+      </div>
+      <button class="btn btn-primary" id="modalOkBtn" style="width: 100%;">Got it!</button>
+    </div>
+  </div>
+
+  <!-- Floating Source Code Inspector Button for Easy Setup -->
+  <button class="inspector-fab" id="openCodeModalBtn">
+    <span>📂</span> View / Copy Source Files
+  </button>
+
+  <!-- Code Files View Modal -->
+  <div class="modal-overlay" id="codeViewModal">
+    <div class="modal-container code-view-modal">
+      <div class="modal-header">
+        <h3>Vibe Cafe Project Files</h3>
+        <button class="modal-close" id="closeCodeModalBtn">&times;</button>
+      </div>
+      <div class="code-tabs">
+        <button class="code-tab active" data-file="readme">README.md</button>
+        <button class="code-tab" data-file="js">script.js</button>
+      </div>
+      <pre class="code-content" id="codeDisplayArea"></pre>
+      <div style="margin-top: 1rem; text-align: right;">
+        <button class="btn btn-secondary" id="copyCodeBtn">Copy Content</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==========================================================================
+       JAVASCRIPT LOGIC
+       ========================================================================== -->
+  <script>
+    /* ==========================================================================
+       CONFIG & SETUP
+       ========================================================================== */
+    const CONFIG = {
+      // Replace with your real Discord invite URL (e.g. "https://discord.gg/abcd123")
+      discordInvite: "https://discord.gg/Rq5gHjZtbz"
+    };
+
+    /* Source code previews for beginner file separation */
+    const CODE_FILES = {
+      readme: `# Vibe Cafe — Discord Community Website
+
+A premium, cozy dark-themed website for the Vibe Cafe Discord community.
+
+## 🚀 How to Run Locally on Windows
+1. Save this file as \`index.html\` in a folder named \`vibe-cafe\`.
+2. Double click \`index.html\` to open it in your browser.
+3. To customize your Discord invite, open \`index.html\` in Notepad or VS Code and update \`CONFIG.discordInvite\`.
+
+## 🎨 Customizing Colors
+Edit the CSS variables inside \`<style>\` at the top of \`index.html\`:
+- \`--accent\`: Change the warm beige color.
+- \`--bg-main\`: Change the dark background tint.
+
+## 🌐 Free Hosting Options
+- **GitHub Pages**: Upload to a repo and enable GitHub Pages in Settings.
+- **Netlify**: Drag and drop your project folder onto Netlify Drop.`,
+
+      js: `// Standalone script.js logic
+const CONFIG = {
+  discordInvite: "https://discord.gg/Rq5gHjZtbz"
+};
+
+document.addEventListener('DOMContentLoaded', () => {
+  console.log('Vibe Cafe Loaded.');
+});`
+    };
+
+    /* ==========================================================================
+       MAIN INTERACTION SCRIPT
+       ========================================================================== */
+    document.addEventListener('DOMContentLoaded', () => {
+
+      // 1. Footer Copyright Year
+      const yearSpan = document.getElementById('copyrightYear');
+      if (yearSpan) {
+        yearSpan.textContent = new Date().getFullYear();
+      }
+
+      // 2. Sticky Header Behavior
+      const header = document.getElementById('header');
+      window.addEventListener('scroll', () => {
+        if (window.scrollY > 40) {
+          header.classList.add('scrolled');
+        } else {
+          header.classList.remove('scrolled');
+        }
+      });
+
+      // 3. Mobile Hamburger Menu
+      const hamburgerBtn = document.getElementById('hamburgerBtn');
+      const navMenu = document.getElementById('navMenu');
+
+      if (hamburgerBtn && navMenu) {
+        hamburgerBtn.addEventListener('click', () => {
+          const isOpen = navMenu.classList.toggle('open');
+          hamburgerBtn.setAttribute('aria-expanded', isOpen);
+        });
+
+        // Close menu on link click
+        navMenu.querySelectorAll('.nav-link').forEach(link => {
+          link.addEventListener('click', () => {
+            navMenu.classList.remove('open');
+            hamburgerBtn.setAttribute('aria-expanded', 'false');
+          });
+        });
+      }
+
+      // 4. FAQ Accordion Interaction
+      const faqItems = document.querySelectorAll('.faq-item');
+      faqItems.forEach(item => {
+        const button = item.querySelector('.faq-button');
+        button.addEventListener('click', () => {
+          const isActive = item.classList.contains('active');
+          
+          // Collapse other active accordions
+          faqItems.forEach(otherItem => {
+            otherItem.classList.remove('active');
+            otherItem.querySelector('.faq-button').setAttribute('aria-expanded', 'false');
+          });
+
+          // Toggle current accordion
+          if (!isActive) {
+            item.classList.add('active');
+            button.setAttribute('aria-expanded', 'true');
+          }
+        });
+      });
+
+      // 5. Discord Join Links Configuration & Fallback Guard
+      const discordBtns = document.querySelectorAll('.js-discord-btn');
+      const discordModal = document.getElementById('discordModal');
+      const closeModalBtn = document.getElementById('closeModalBtn');
+      const modalOkBtn = document.getElementById('modalOkBtn');
+
+      discordBtns.forEach(btn => {
+        btn.setAttribute('href', CONFIG.discordInvite);
+        
+        btn.addEventListener('click', (e) => {
+          if (CONFIG.discordInvite.includes('YOUR_INVITE_CODE')) {
+            e.preventDefault();
+            discordModal.classList.add('active');
+          }
+        });
+      });
+
+      if (closeModalBtn && modalOkBtn) {
+        const closeModal = () => discordModal.classList.remove('active');
+        closeModalBtn.addEventListener('click', closeModal);
+        modalOkBtn.addEventListener('click', closeModal);
+      }
+
+      // 6. Back to Top Button
+      const backToTopBtn = document.getElementById('backToTopBtn');
+      if (backToTopBtn) {
+        backToTopBtn.addEventListener('click', () => {
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+      }
+
+      // 7. Source Code Inspector Modal Logic
+      const openCodeModalBtn = document.getElementById('openCodeModalBtn');
+      const codeViewModal = document.getElementById('codeViewModal');
+      const closeCodeModalBtn = document.getElementById('closeCodeModalBtn');
+      const codeDisplayArea = document.getElementById('codeDisplayArea');
+      const codeTabs = document.querySelectorAll('.code-tab');
+      const copyCodeBtn = document.getElementById('copyCodeBtn');
+
+      let currentFile = 'readme';
+
+      if (openCodeModalBtn && codeViewModal) {
+        openCodeModalBtn.addEventListener('click', () => {
+          codeViewModal.classList.add('active');
+          updateCodeView();
+        });
+
+        closeCodeModalBtn.addEventListener('click', () => {
+          codeViewModal.classList.remove('active');
+        });
+
+        codeTabs.forEach(tab => {
+          tab.addEventListener('click', () => {
+            codeTabs.forEach(t => t.classList.remove('active'));
+            tab.classList.add('active');
+            currentFile = tab.dataset.file;
+            updateCodeView();
+          });
+        });
+
+        function updateCodeView() {
+          codeDisplayArea.textContent = CODE_FILES[currentFile];
+        }
+
+        copyCodeBtn.addEventListener('click', () => {
+          const text = CODE_FILES[currentFile];
+          const textarea = document.createElement('textarea');
+          textarea.value = text;
+          document.body.appendChild(textarea);
+          textarea.select();
+          document.execCommand('copy');
+          document.body.removeChild(textarea);
+          
+          copyCodeBtn.textContent = 'Copied!';
+          setTimeout(() => {
+            copyCodeBtn.textContent = 'Copy Content';
+          }, 2000);
+        });
+      }
+
+    });
+  </script>
+</body>
+</html>
